@@ -1,0 +1,87 @@
+#!/bin/bash
+# brewing times 
+tea_time_mm=420
+tea_name_mm="Marokkanische Minze"
+tea_time_ta=420
+tea_name_ta="Tuerkischer Apfel"
+tea_time_b=240
+tea_name_b="Schwarzer Tee Nero"
+tea_time_pg=420
+tea_name_pg="Persischer Granatapfel"
+tea_time_cs=240
+tea_name_cs="Chinesischer Sencha"
+chosen_tea_time=0
+
+echo "Welchen Tee moechten Sie trinken?"
+echo "  * 1 = $tea_name_mm"
+echo "  * 2 = $tea_name_ta"
+echo "  * 3 = $tea_name_b"
+echo "  * 4 = $tea_name_pg"
+echo "  * 5 = $tea_name_cs"
+
+
+tea_one=$(cat <<'tea1'
+      \    \    \ 
+      /    /    /
+      \    \    \ 
+      /    /    /
+tea1
+)
+
+tea_two=$(cat <<'tea2'
+      /    /    /
+      \    \    \ 
+      /    /    /
+      \    \    \ 
+tea2
+)
+
+
+tea_cup=$(cat <<'teac'
+ ______________,________
+ \             |       /
+  \            -      /__
+   \          | |    /   |
+    \	       -    /----
+  ___\ ____________/___
+  \___________________/
+teac
+)
+
+tea_ready=$(cat <<'tear'
+___________             .__          __      _____              __  .__
+\__    ___/___   ____   |__| _______/  |_  _/ ____\____________/  |_|__| ____
+  |    |_/ __ \_/ __ \  |  |/  ___/\   __\ \   __\/ __ \_  __ \   __\  |/ ___\ 
+  |    |\  ___/\  ___/  |  |\___ \  |  |    |  | \  ___/|  | \/|  | |  / /_/  >
+  |____| \___  >\___  > |__/____  > |__|    |__|  \___  >__|   |__| |__\___  /
+             \/     \/          \/                    \/              /_____/
+tear
+)
+
+read tea_type
+
+case $tea_type in 
+    1) chosen_tea_time=$tea_time_mm && tea_name=$tea_name_mm;;
+	2) chosen_tea_time=$tea_time_ta && tea_name=$tea_name_ta;;
+	3) chosen_tea_time=$tea_time_b && tea_name=$tea_name_b;;
+	4) chosen_tea_time=$tea_time_pg && tea_name=$tea_name_pg;;
+	5) chosen_tea_time=$tea_time_cs && tea_name=$tea_name_cs;;
+esac
+
+clear
+while [ $chosen_tea_time -gt 1 ]
+do
+    chosen_tea_time=$[$chosen_tea_time-1]
+    clear
+    if [[ $chosen_tea_time%2 -eq 0 ]]; then
+        echo "$tea_one"
+    else
+        echo "$tea_two"
+    fi  
+    echo "$tea_cup"
+	echo "$tea_name: $chosen_tea_time s"   
+    sleep 1     
+done
+
+clear
+echo "$tea_ready"
